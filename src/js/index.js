@@ -37,24 +37,15 @@ function getUrlParam(parameter, defaultvalue){
 }
 
 function insertParam(key, value){
-    key = encodeURI(key); value = encodeURI(value);
-    var kvp = document.location.search.substr(1).split('&');
-    var i=kvp.length; var x; while(i--){
-        x = kvp[i].split('=');
-
-        if (x[0]==key)
-        {
-            x[1] = value;
-            kvp[i] = x.join('=');
-            break;
-        }
+    const uri = window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+      if (uri.match(re)) {
+        window.location.href = uri.replace(re, '$1' + key + "=" + value + '$2');
+      }
+      else {
+        window.location.href = uri + separator + key + "=" + value;
     }
-    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-    //this will reload the page, it's likely better to store this until finished
-    var url = kvp.join('&');
-    url = url.replace("&", "?");  // replace first '&' with '?'
-    document.location.search = url; 
 }
 
 function validURL(str) {
@@ -62,7 +53,7 @@ function validURL(str) {
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\?[;&a-z\\d%_.,~+=-]*)?'+ // query string
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
   return !!pattern.test(str);
 }
@@ -78,19 +69,11 @@ function submit(){
     }
 }
 
-// function canAccessIFrame(iframe) {
-//     if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
-//       iframe.onreadystatechange = function(){
-//         if (iframe.readyState == "complete"){
-//           alert("Iframe is now loaded.");
-//         }
-//       };
-//     } else {
-//       iframe.onload = function(){
-//         alert("Iframe is now loaded.");
-//       };
-//     }
-// }
+function updateMetaTags(){
+    const url = document.getElementById('url-search').value;
+    $('meta[name=description]').remove();
+    $('head').append( '<meta name="description" content="Render ' + url + ' in an iframe">' );
+}
 
 function afterLoading(){
     console.log('iframe loaded');
@@ -121,6 +104,7 @@ function loadIframe(url){
             $('#iframe-window').load(function(){
                 afterLoading()
             });
+            updateMetaTags();
         }
         
     } else {
