@@ -91,9 +91,10 @@ function loadIframe(url){
         document.getElementById('url-search').value = url;
 
         if (!validURL(url)){
-            // alert(url + " is not a valid url");
             var input = document.getElementById("url-search");
-            input.classList.add("error");
+            // input.classList.add("error");
+            $('#error-message').css('display', 'flex');
+            document.getElementById("error-text").textContent="'" + url + "' is not a valid url";
             input.focus();
             // return;
         } else {

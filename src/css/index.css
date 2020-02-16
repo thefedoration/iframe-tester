@@ -31,12 +31,13 @@ main {
 }
 
 h1{
-    margin-bottom: 5px;
+    margin: 5px auto;
+    line-height: 50px;
     text-align: center;
 }
 
 main .search-bar-container {
-    margin: 0 auto 20px;
+    margin: 10px auto 20px;
     width: 600px;
     max-width: 100%;
     display: flex;
@@ -65,7 +66,9 @@ main .search-bar-container button {
 }
 
 main .iframe-container {
-    width: 100%;
+    width: 1040px;
+    max-width: 100%;
+    margin: 0 auto;
     flex-grow: 1;
     border-radius: 5px;
     border-width: 1px;
@@ -82,7 +85,9 @@ main .iframe-container iframe{
 main .iframe-container #iframe-display{
     display: none;
 }
-main .iframe-container #blank-state, main .iframe-container #loading-state{
+main .iframe-container #blank-state,
+main .iframe-container #loading-state,
+main .iframe-container #error-message{
     text-align: center;
     vertical-align: middle;
     display: flex;
@@ -93,10 +98,17 @@ main .iframe-container #blank-state, main .iframe-container #loading-state{
     background: #e4e2e2;
     color: black;
 }
-main .iframe-container #blank-state h2, main .iframe-container #loading-state h2{
+main .iframe-container #blank-state h2,
+main .iframe-container #loading-state h2,
+main .iframe-container #error-message h2{
     opacity: 0.25;
     font-weight: bold;
     margin: 0;
+}
+
+main .iframe-container #error-message h2{
+    color: #ee5253;
+    opacity: 1;
 }
 
 footer{
@@ -106,6 +118,7 @@ footer{
     right:0;
     height: 30px;
     background: #1d2127;
+    background: transparent;
 }
 
 /*

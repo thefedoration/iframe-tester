@@ -36,10 +36,9 @@
     </head>
     <body>
         <header>
-            
+            <h1>Iframe Tester</h1>
         </header>
         <main>
-            <h1>Iframe Tester</h1>
             <div class="search-bar-container">
                 <input id="url-search" type="text" placeholder="Enter a url"></input>
                 <button onclick="submit()">Render iframe</button>
@@ -53,6 +52,9 @@
                 </div>
                 <div id="loading-state">
                     <h2>Loading...</h2>
+                </div>
+                <div id="error-message">
+                    <h2 id="error-text"></h2>
                 </div>
             </div>
         </main>
