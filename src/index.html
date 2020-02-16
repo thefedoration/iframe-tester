@@ -5,12 +5,12 @@
         <meta name="description" content="Test is a webpage can be placed in an iframe">
         <meta property="og:title" content="Test is a webpage can be placed in an iframe"/>
         <meta property="og:description" content="Test is a webpage can be placed in an iframe"/>
-        <meta property="og:image" content="./img/fed.jpg" />
+        <!-- <meta property="og:image" content="./img/fed.jpg" /> -->
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="208" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/ico" href="./img/fg.ico" />
+        <!-- <link rel="shortcut icon" type="image/ico" href="./img/fg.ico" /> -->
 
 
         <link rel="stylesheet" href="./css/vendored/normalize.css">
@@ -36,22 +36,28 @@
     </head>
     <body>
         <header>
-            header
+            
         </header>
         <main>
             <h1>Iframe Tester</h1>
             <div class="search-bar-container">
                 <input id="url-search" type="text" placeholder="Enter a url"></input>
-                <button>Render iframe</button>
+                <button onclick="submit()">Render iframe</button>
             </div>
             <div class="iframe-container">
-                <iframe>
+                <iframe id="iframe-display">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
+                <div id="blank-state">
+                    <h2>Enter a url above to view it in an iframe</h2>
+                </div>
+                <div id="loading-state">
+                    <h2>Loading...</h2>
+                </div>
             </div>
         </main>
         <footer>
-            footer
+            
         </footer>
     </body>
 </html>

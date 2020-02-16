@@ -13,7 +13,7 @@ header{
     top:0;
     left:0;
     right:0;
-    padding:20px;
+    height: 50px;
     background: #1d2127;
     box-shadow: 0 1px 1px rgba(0,0,0,0.25);
 }
@@ -21,10 +21,10 @@ header{
 main {
     margin: 10px;
     position:fixed;
-    top: 56px;
+    top: 50px;
     left: 0;
     right: 0;
-    bottom: 36px;
+    height: calc(100% - 100px);
 
     display: flex;
     flex-direction: column;
@@ -65,14 +65,32 @@ main .search-bar-container button {
 main .iframe-container {
     width: 100%;
     flex-grow: 1;
+    border-radius: 3px;
+    border-width: 1px;
+    border: 1px solid rgba(255,255,255,0.25);
 }
 
 main .iframe-container iframe{
     width: 100%;
     height: 100%;
-    border-radius: 3px;
-    border-width: 1px;
-    border-color: rgba(255,255,255,0.25);
+    border: none;
+}
+
+main .iframe-container #iframe-display{
+    display: none;
+}
+main .iframe-container #blank-state, main .iframe-container #loading-state{
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    display: none;
+}
+main .iframe-container #blank-state h2, main .iframe-container #loading-state h2{
+    opacity: 0.25;
+    margin: 0;
 }
 
 footer{
@@ -80,7 +98,7 @@ footer{
     bottom:0;
     left:0;
     right:0;
-    padding:10px;
+    height: 30px;
     background: #1d2127;
 }
 
