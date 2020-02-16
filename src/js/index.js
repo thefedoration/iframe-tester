@@ -78,10 +78,26 @@ function submit(){
     }
 }
 
+// function canAccessIFrame(iframe) {
+//     if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
+//       iframe.onreadystatechange = function(){
+//         if (iframe.readyState == "complete"){
+//           alert("Iframe is now loaded.");
+//         }
+//       };
+//     } else {
+//       iframe.onload = function(){
+//         alert("Iframe is now loaded.");
+//       };
+//     }
+// }
+
 function afterLoading(){
     console.log('iframe loaded');
-    $('#iframe-display').css('display', 'block');;
-}
+    $('#iframe-window').css('display', 'block');    
+
+    // const iframe = document.getElementById('iframe-window');
+}   
 
 function loadIframe(url){
     if (!url){
@@ -98,17 +114,17 @@ function loadIframe(url){
             input.focus();
             // return;
         } else {
-            document.getElementById('iframe-display').src = url;
-            $('#iframe-display').css('display', 'none');
+            document.getElementById('iframe-window').src = url;
+            $('#iframe-window').css('display', 'none');
             $('#blank-state').css('display', 'none');
             $('#loading-state').css('display', 'flex');
-            $('#iframe-display').load(function(){
+            $('#iframe-window').load(function(){
                 afterLoading()
             });
         }
         
     } else {
-        $('#iframe-display').css('display', 'none');
+        $('#iframe-window').css('display', 'none');
         $('#blank-state').css('display', 'flex');
         $('#loading-display').css('display', 'none');
     }

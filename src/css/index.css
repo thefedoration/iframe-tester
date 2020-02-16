@@ -82,7 +82,7 @@ main .iframe-container iframe{
     border: none;
 }
 
-main .iframe-container #iframe-display{
+main .iframe-container #iframe-window{
     display: none;
 }
 main .iframe-container #blank-state,
