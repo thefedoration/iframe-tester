@@ -57,6 +57,16 @@ function insertParam(key, value){
     document.location.search = url; 
 }
 
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+}
+
 function submit(){
     url = document.getElementById('url-search').value;
     if (url){
@@ -79,13 +89,23 @@ function loadIframe(url){
     }
     if (url){
         document.getElementById('url-search').value = url;
-        document.getElementById('iframe-display').src = url;
-        $('#iframe-display').css('display', 'none');
-        $('#blank-state').css('display', 'none');
-        $('#loading-state').css('display', 'flex');
-        $('#iframe-display').load(function(){
-            afterLoading()
-        });
+
+        if (!validURL(url)){
+            // alert(url + " is not a valid url");
+            var input = document.getElementById("url-search");
+            input.classList.add("error");
+            input.focus();
+            // return;
+        } else {
+            document.getElementById('iframe-display').src = url;
+            $('#iframe-display').css('display', 'none');
+            $('#blank-state').css('display', 'none');
+            $('#loading-state').css('display', 'flex');
+            $('#iframe-display').load(function(){
+                afterLoading()
+            });
+        }
+        
     } else {
         $('#iframe-display').css('display', 'none');
         $('#blank-state').css('display', 'flex');
