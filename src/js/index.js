@@ -36,15 +36,15 @@ function getUrlParam(parameter, defaultvalue){
     return urlparameter;
 }
 
-function insertParam(key, value){
-    const uri = window.location.href;
+// returns new url with inserted param
+function insertParam(uri, key, value){
     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
       var separator = uri.indexOf('?') !== -1 ? "&" : "?";
       if (uri.match(re)) {
-        window.location.href = uri.replace(re, '$1' + key + "=" + value + '$2');
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
       }
       else {
-        window.location.href = uri + separator + key + "=" + value;
+        return uri + separator + key + "=" + value;
     }
 }
 
@@ -61,7 +61,19 @@ function validURL(str) {
 function submit(){
     url = document.getElementById('url-search').value;
     if (url){
-        insertParam('url', url);
+
+        if (!url.includes('http://') && !url.includes('https://')){
+            url = 'https://' + url 
+        }
+
+        var newUrl = insertParam(window.location.href, 'url', url);
+
+        // check the referrer
+        if (window.location.origin && window.location.origin !== 'https://iframetester.com'){
+            newUrl = insertParam(newUrl, 'ref', window.location.origin);
+        }
+
+        window.location.href = newUrl;
     } else {
         // autofocus on the url field if we don't have a url
         var input = document.getElementById("url-search");
@@ -71,8 +83,9 @@ function submit(){
 
 function updateMetaTags(){
     const url = document.getElementById('url-search').value;
-    $('meta[name=description]').remove();
-    $('head').append( '<meta name="description" content="Render ' + url + ' in an iframe">' );
+    // dont need to do this
+    // $('meta[name=description]').remove();
+    // $('head').append( '<meta name="description" content="Render ' + url + ' in an iframe">' );
 }
 
 function afterLoading(){

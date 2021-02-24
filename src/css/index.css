@@ -101,14 +101,20 @@ main .iframe-container #error-message{
 main .iframe-container #blank-state h2,
 main .iframe-container #loading-state h2,
 main .iframe-container #error-message h2{
-    opacity: 0.25;
+    opacity: 0.5;
     font-weight: bold;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 main .iframe-container #error-message h2{
     color: #ee5253;
     opacity: 1;
+}
+
+main .iframe-container #blank-state p{
+    margin: 5px 0;
+    opacity: 0.5;
 }
 
 footer{
